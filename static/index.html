@@ -105,6 +105,17 @@
     <button id="clear-log" class="button-demo">Clear log</button>
 
     <script>
+          var actions;
+               actions= [
+          {
+            action: 'explore', title: 'Explore this new world',
+            title:'Watch',
+            icon: 'http://www.iconarchive.com/download/i83709/custom-icon-design/mono-general-4/eye.ico'},
+          {
+            action: 'close',
+            title: 'Close notification'
+          }
+          ]
       if (!('Notification' in window)) {
         document.getElementById('wn-unsupported').classList.remove('hidden');
         document.getElementById('button-wn-show-preset').setAttribute('disabled', 'disabled');
@@ -120,11 +131,11 @@
           event.preventDefault();
 
           if (event.target.id === 'button-wn-show-preset') {
-            title = 'Email received';
+            title = 'Hey dude';
             options = {
-              body: 'You have a total of 3 unread emails',
+              body: 'You have a 30 unwatched video',
               tag: 'preset',
-              icon: 'http://www.audero.it/favicon.ico'
+              icon: 'https://s3.ap-south-1.amazonaws.com/vibo/shankar/favicon.png'
             };
           } else {
             title = document.getElementById('title').value;
@@ -135,7 +146,7 @@
           }
 
           Notification.requestPermission(function() {
-            var notification = new Notification(title, options);
+            var notification = new Notification(title, options, actions);
 
             notificationEvents.forEach(function(eventName) {
               notification[eventName] = function(event) {
@@ -150,6 +161,9 @@
         document.getElementById('clear-log').addEventListener('click', function() {
           log.innerHTML = '';
         });
+      }
+      Notification.onclick=function(){
+        window.open("https://app.vookmark.co")
       }
     </script>
   </body>
